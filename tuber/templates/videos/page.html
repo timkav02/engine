@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{%block tags %}{{ info.tags.slugs|join:", " }}{%endblock%}
+{%block title%} {{ info.title }} {%endblock%}
+{%block content%}
+			<div class="show-top-grids">
+				<div class="col-sm-8 single-left">
+					<div class="song">
+						<div class="song-info">
+							<h3>{{info.title}}</h3>	
+					   </div>
+						<div class="video-grid" align="center">
+							{% autoescape off %}{{ info.embedded }}{% endautoescape %}
+						</div>
+					</div>
+
+					<div class="clearfix"> </div>
+					<div class="published">
+						<script src="{% static 'js/jquery.min.js' %}"></script>
+							<script>
+								$(document).ready(function () {
+									size_li = $("#myList li").size();
+									x=1;
+									$('#myList li:lt('+x+')').show();
+									$('#loadMore').click(function () {
+										x= (x+1 <= size_li) ? x+1 : size_li;
+										$('#myList li:lt('+x+')').show();
+									});
+									$('#showLess').click(function () {
+										x=(x-1<0) ? 1 : x-1;
+										$('#myList li').not(':lt('+x+')').hide();
+									});
+								});
+							</script>
+							<div class="load_more" align="center">	
+								<ul id="myList">
+									<li>
+										<!-- JuicyAds v3.0 -->
+										<script type="text/javascript" data-cfasync="false" async src="https://adserver.juicyads.com/js/jads.js"></script>
+										<ins id="699930" data-width="720" data-height="100"></ins>
+										<script type="text/javascript" data-cfasync="false" async>(adsbyjuicy = window.adsbyjuicy || []).push({'adzone':699930});</script>
+										<!--JuicyAds END-->
+									</li>
+								</ul>
+							</div>
+					</div>
+
+				<div class="recommended">
+									<h3>You may also like</h3>
+					<!--LINE GRID-->
+					<div class="recommended-grids">
+						{% for each_tube in same_channel %}
+						<div class="col-md-3 resent-grid recommended-grid">
+							<div class="resent-grid-img recommended-grid-img images-rotation" 
+							data-images='[{% for image in each_tube.flipbook_set.all %}{% if not forloop.last %}"{{image}}",{% else %}"{{image}}"{% endif %}{% endfor %}]'>
+								<a href="{% url 'search:load_page' each_tube.id %}" target="blank"><img src="{{ each_tube.flipbook_set.first }}" alt="{{ each_tube.title }}"/></a>
+							</div>
+							<div class="resent-grid-info recommended-grid-info video-info-grid">
+								<h5><a href="{% url 'search:load_page' each_tube.id %}" target="blank" class="title">{{ each_tube.title }}</a></h5>
+							</div>
+						</div>
+						{% endfor %}
+					</div>
+				</div>						
+				</div>
+				<div class="col-md-4 single-right">
+					<h3>Similar Videos</h3>
+					<div class="single-grid-right">
+					{% for video in similar_video %}
+						<div class="single-right-grids">
+							<div class="col-md-4 single-right-grid-left">
+								<a href="{% url 'search:load_page' video.id %}" target="_blank"><img src="{{ video.flipbook_set.first }}" alt="{{ video.title }}" /></a>
+							</div>
+							<div class="col-md-8 single-right-grid-right">
+								<a href="{% url 'search:load_page' video.id %}" target="_blank" class="title"> {{ video.title }}</a>
+								<p class="author"><a href="{% url 'search:select_by_channel' video.channel %}" target="_blank" class="author">{{video.channel}}</a></p>
+								<p class="views">{{ video.views }}</p>
+							</div>
+							<div class="clearfix"> </div>
+						</div>
+					{% endfor %}
+					</div>
+				<div class="clearfix"> </div>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+{%endblock%}

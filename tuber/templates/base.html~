@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+{%load staticfiles%}
+<html lang="en">
+   <head>
+        <title>{%block title%}{%endblock%} - xrateddb.com </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="keywords" content="{%block tags%} {%endblock%}" />
+        <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+        <link rel="icon" href="{% static 'images/favicon.ico' %}">
+        <!-- bootstrap -->
+        <link href="{% static 'css/bootstrap.min.css' %}" rel='stylesheet' type='text/css' media="all" />
+        <!-- //bootstrap -->
+        <link href="{% static 'css/dashboard.css' %}" rel="stylesheet">
+        <!-- Custom Theme files -->
+        <link href="{% static 'css/style.css' %}" rel='stylesheet' type='text/css' media="all" />
+        <script src="{% static 'js/jquery-1.11.2.min.js' %}"></script>
+        <script src="{% static 'js/jquery.images-rotation.js' %}"></script>
+        <!--start-smoth-scrolling-->
+        <!-- fonts -->
+        <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+        <link href='//fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
+        <!-- //fonts -->
+    </head>
+    <body>
+            <!--HEADER-->
+            <nav class="navbar navbar-inverse navbar-fixed-top">
+                    <div class="container-fluid">
+                      <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                          <span class="sr-only">Toggle navigation</span>
+                          <span class="icon-bar"></span>
+                          <span class="icon-bar"></span>
+                          <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href=""><h1><img src="{% static 'images/logo.png' %}" alt="xrateddb" /></h1></a>
+                      </div>
+                      <div id="navbar" class="navbar-collapse collapse">
+                          <div class="top-search">
+                              <form class="navbar-form navbar-right" action="{% url 'search:post_search' %}" method="GET">
+                                  <input type="text" name="q" class="form-control" value="{{ request.GET.q }}" placeholder="Adult Content Search...">
+                                  <input type="submit" value="">
+                              </form>
+                          </div>
+              
+                      </div>
+                      <div class="clearfix"> </div>
+                    </div>
+            </nav>
+            <!--HEADER-->
+            <!--BODY-->
+            <div class="col-sm-3 col-md-2 sidebar" align="center"touch >	
+					<!-- JuicyAds v3.0 -->
+					<script type="text/javascript" data-cfasync="false" async src="https://adserver.juicyads.com/js/jads.js"></script>
+					<ins id="699929" data-width="168" data-height="582"></ins>
+					<script type="text/javascript" data-cfasync="false" async>(adsbyjuicy = window.adsbyjuicy || []).push({'adzone':699929});</script>
+					<!--JuicyAds END-->            
+            </div>
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            {%block content%}
+		
+            {%endblock%}
+            <!-- images rotator
+				================================================ -->
+				<script>
+					$('.images-rotation').imagesRotation();
+				</script>	
+            <!--BODY-->
+            <!--FOOTER-->
+            <div class="footer">
+                    <div class="footer-grids">
+                        <div class="footer-top">
+                            <div class="footer-top-nav">
+                                <ul>
+                                    <li><a href="{% url 'search:about_us' %}" target="blank">About Us</a></li>
+                                    <li><a href="{% url 'search:rule_2257'%}" target="blank">2257</a></li>
+                                    <!--<li><a href="#">Contact Us</a></li>-->
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="footer-bottom">
+                            <div class="copyright">
+                                <p>Copyright © 2018 Bilqis Media LLC. All Rights Reserved </p>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            </div>
+            <!--FOOTER-->
+            <!--DEFAULT-JS-->
+
+            <!--DEFAULT-JS-->
+                <!-- Bootstrap core JavaScript
+                ================================================== -->
+                <!-- Placed at the end of the document so the pages load faster -->
+                <script src="{% static 'js/bootstrap.min.js' %}"></script>
+                
+                 <!-- Global site tag (gtag.js) - Google Analytics -->
+                <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119693908-2"></script>
+                        <script>
+                                window.dataLayer = window.dataLayer || [];
+                                function gtag(){dataLayer.push(arguments);}
+                                gtag('js', new Date());
+
+                                gtag('config', 'UA-119693908-2');
+                        </script>
+    </body>

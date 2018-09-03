@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{%block title%} Search Results{%endblock%}
+{%block content%}
+			<div class="main-grids">
+				<div class="recommended">
+					<!--LINE GRID-->
+					<div class="recommended-grids">
+
+							<div class="recommended-info" align="center">
+									<h4>{% include "videos/pagination.html" with page=results %}</h4>
+							</div>
+							<div class="clearfix"> </div>
+
+							{% for item in results %}
+						<div class="col-md-3 resent-grid recommended-grid">
+							<div class="resent-grid-img recommended-grid-img images-rotation" 
+							data-images='[{% for image in item.flipbook_set.all %}{% if not forloop.last %}"{{image}}",{% else %}"{{image}}"{% endif %}{% endfor %}]'>
+								<a href="{% url 'search:load_page' item.id %}" target="_blank"><img src="{{ item.flipbook_set.first }}" alt="{{ item.title }}"/></a>
+							</div>
+							<div class="resent-grid-info recommended-grid-info video-info-grid">
+								<h5><a href="{% url 'search:load_page' item.id %}" target="_blank" class="title">{{ item.title }}</a></h5>
+								<ul>
+									<li><p class="author author-info">{{item.channel}}</p></li>
+									<li class="right-list"><p class="views views-info">{{ item.views }}</p></li>
+								</ul>
+							</div>
+						</div>
+							{% endfor %}
+						
+						 <div class="clearfix"> </div>
+						<div class="recommended-info" align="center">
+							<h5>{% include "videos/pagination.html" with page=results %}</h5>
+						</div>						
+
+					</div>
+				</div>				
+				
+			</div>
+{%endblock%}

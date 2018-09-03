@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{%block tags %}Adult Search Engine, Porn Search, {%endblock%}
+{%block title%} Adult search engine - xratedDB.com {%endblock%}
+{%block content%}
+			<div class="main-grids">
+				<div class="recommended">
+					<!--LINE GRID-->
+					<div class="recommended-grids">
+
+						<div class="recommended-info" align="center">
+								<h4>{% include "videos/pagination.html" with page=tubes %}</h4>
+						</div>
+						<div class="clearfix"> </div>
+
+						{% for each_tube in tubes %}
+						<div class="col-md-3 resent-grid recommended-grid">
+							<div class="resent-grid-img recommended-grid-img images-rotation" 
+							data-images='[{% for image in each_tube.flipbook_set.all %}{% if not forloop.last %}"{{image}}",{% else %}"{{image}}"{% endif %}{% endfor %}]'>
+								<a href="{% url 'search:load_page' each_tube.id %}" target="blank"><img src="{{ each_tube.flipbook_set.first }}" alt="{{ each_tube.title }}"/></a>
+							</div>
+							<div class="resent-grid-info recommended-grid-info video-info-grid">
+								<h5><a href="{% url 'search:load_page' each_tube.id %}" target="blank" class="title">{{ each_tube.title }}</a></h5>
+								<ul>
+									<li><p class="author author-info">{{each_tube.channel}}</p></li>
+									<li class="right-list"><p class="views views-info">{{ each_tube.views }}</p></li>
+								</ul>
+							</div>
+						</div>
+						{% endfor %}
+						
+						 <div class="clearfix"> </div>
+						<div class="recommended-info" align="center">
+							<h4>{% include "videos/pagination.html" with page=tubes %}</h4>
+						</div>						
+
+					</div>
+				</div>				
+			</div>
+{%endblock%}

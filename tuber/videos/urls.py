@@ -1,0 +1,13 @@
+from django.urls import path
+from . import views
+
+app_name = 'search'
+
+urlpatterns = [
+    path('', views.index, name='index'),
+    path(r'channel/<slug:channel>/', views.select_by_channel, name='select_by_channel'),
+    path(r'page/<slug:id>', views.load_page, name='load_page'),
+    path('search/', views.post_search, name='post_search'),
+    path('about', views.about_us, name='about_us'),
+    path('2257', views.rule_2257, name='rule_2257'),
+]
